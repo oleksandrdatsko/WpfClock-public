@@ -23,3 +23,5 @@ D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\obj\Debug\WpfClock.csproj.C
 D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\obj\Debug\WpfClock.csproj.CopyComplete
 D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\obj\Debug\WpfClock.exe
 D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\obj\Debug\WpfClock.pdb
+D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\obj\Debug\Views\clockMainView.g.cs
+D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\obj\Debug\Views\clockMainView.baml

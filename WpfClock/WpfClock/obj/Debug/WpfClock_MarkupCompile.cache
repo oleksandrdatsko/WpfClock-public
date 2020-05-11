@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\App.xaml
-1-250345876
+2-1716495813
 
-71547302175
+10399067823
 701724509656
-Views\ShellView.xaml;
+Views\clockMainView.xaml;Views\ShellView.xaml;
 
 False
 
