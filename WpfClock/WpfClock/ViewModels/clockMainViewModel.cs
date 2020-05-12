@@ -113,6 +113,12 @@ namespace WpfClock.ViewModels
         private string _locationBlock;
         private ImageSource _currentWeatherImage;
         private string _temperatureBlock;
+        private string _tempHighBlock;
+        private string _tempLowBlock;
+        private string _humidityBlock;
+        private string _windBlock;
+        private string _windDirectionBlock;
+        private string _lastUpdateBlock;
 
         public string LocationBlock
         {
@@ -144,8 +150,6 @@ namespace WpfClock.ViewModels
             }
         }
 
-        private string _tempHighBlock;
-
         public string TempHighBlock
         {
             get { return _tempHighBlock; }
@@ -155,8 +159,6 @@ namespace WpfClock.ViewModels
                 NotifyOfPropertyChange(() => TempHighBlock);
             }
         }
-
-        private string _tempLowBlock;
 
         public string TempLowBlock
         {
@@ -168,8 +170,6 @@ namespace WpfClock.ViewModels
             }
         }
 
-        private string _humidityBlock;
-
         public string HumidityBlock
         {
             get { return _humidityBlock; }
@@ -179,8 +179,6 @@ namespace WpfClock.ViewModels
                 NotifyOfPropertyChange(() => HumidityBlock);
             }
         }
-
-        private string _windBlock;
 
         public string WindBlock
         {
@@ -192,8 +190,6 @@ namespace WpfClock.ViewModels
             }
         }
 
-        private string _windDirectionBlock;
-
         public string WindDirectionBlock
         {
             get { return _windDirectionBlock; }
@@ -204,8 +200,6 @@ namespace WpfClock.ViewModels
             }
         }
 
-        private string _lastUpdateBlock;
-
         public string LastUpdateBlock
         {
             get { return _lastUpdateBlock; }
@@ -215,7 +209,6 @@ namespace WpfClock.ViewModels
                 NotifyOfPropertyChange(() => LastUpdateBlock);
             }
         }
-
 
         private void SetCurrentWeatherTimer()
         {
@@ -245,10 +238,12 @@ namespace WpfClock.ViewModels
 
         #endregion
 
+        #region Buttons
         public void CloseClockBtn()
         {
             Application.Current.Shutdown();
         }
+        #endregion
 
     }
 }
