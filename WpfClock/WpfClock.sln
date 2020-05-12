@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClock", "WpfClock\WpfClock.csproj", "{1B257E28-2D03-413A-BF06-CB0413796C23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeatherAPI", "..\..\MVVM_WPF\OpenWeatherAPI\OpenWeatherAPI.csproj", "{3B5F9A1B-4751-41D6-8A3A-002DD67B1964}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1B257E28-2D03-413A-BF06-CB0413796C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B257E28-2D03-413A-BF06-CB0413796C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B257E28-2D03-413A-BF06-CB0413796C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B5F9A1B-4751-41D6-8A3A-002DD67B1964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B5F9A1B-4751-41D6-8A3A-002DD67B1964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B5F9A1B-4751-41D6-8A3A-002DD67B1964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B5F9A1B-4751-41D6-8A3A-002DD67B1964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

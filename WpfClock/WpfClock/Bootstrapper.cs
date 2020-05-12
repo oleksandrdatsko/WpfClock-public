@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using OpenWeatherAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace WpfClock
         public Bootstrapper()
         {
             Initialize();
+            APIHelper.InitializeClient();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

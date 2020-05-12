@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using OpenWeatherAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,13 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using WeatherApp.Models;
 using WpfClock.Models;
 
 namespace WpfClock.ViewModels
 {
     public class clockMainViewModel : Screen
     {
+        private WeatherDataModel _weatherDataModel = new WeatherDataModel();
         private DispatcherTimer _clockRefreshTimer = new DispatcherTimer();
         private TimeDateModel _timeDateModel = new TimeDateModel();
         private string _minuteBlock;
@@ -22,9 +27,11 @@ namespace WpfClock.ViewModels
 
         public clockMainViewModel()
         {
+            _weatherDataModel.LoadCurrentWeatherData();
             SetClockTimer();
         }
 
+        #region Clock Properties
         public string HourBlock
         {
             get
@@ -77,30 +84,31 @@ namespace WpfClock.ViewModels
             }
         }
 
-        public void CloseClockBtn()
-        {
-            Application.Current.Shutdown();
-        }
-
         private void SetClockTimer()
         {
             _clockRefreshTimer.Start();
             _clockRefreshTimer.Interval = TimeSpan.FromSeconds(0.5);
-            _clockRefreshTimer.Tick += new EventHandler(timer_Tick);
+            _clockRefreshTimer.Tick += new EventHandler(ClockTimerTick);
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void ClockTimerTick(object sender, EventArgs e)
         {
-            getTime();
+            GetTime();
         }
 
-        private void getTime()
+        private void GetTime()
         {
             _timeDateModel.setDate();
             HourBlock = _timeDateModel.HourStr;
             MinuteBlock = _timeDateModel.MinuteStr;
             DateBlock = _timeDateModel.Date;
             WeekDayBlock = _timeDateModel.WeekDay;
+        }
+        #endregion
+
+        public void CloseClockBtn()
+        {
+            Application.Current.Shutdown();
         }
 
     }
