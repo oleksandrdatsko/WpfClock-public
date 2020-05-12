@@ -28,6 +28,7 @@ namespace WpfClock.ViewModels
         public clockMainViewModel()
         {
             _weatherDataModel.LoadCurrentWeatherData();
+            SetCurrentWeatherTimer();
             SetClockTimer();
         }
 
@@ -104,6 +105,144 @@ namespace WpfClock.ViewModels
             DateBlock = _timeDateModel.Date;
             WeekDayBlock = _timeDateModel.WeekDay;
         }
+        #endregion
+
+
+        #region Current Weather Properties
+
+        private string _locationBlock;
+        private ImageSource _currentWeatherImage;
+        private string _temperatureBlock;
+
+        public string LocationBlock
+        {
+            get { return _locationBlock; }
+            set
+            {
+                _locationBlock = value;
+                NotifyOfPropertyChange(() => LocationBlock);
+            }
+        }
+
+        public ImageSource CurrentWeatherImage
+        {
+            get { return _currentWeatherImage; }
+            set
+            {
+                _currentWeatherImage = value;
+                NotifyOfPropertyChange(() => CurrentWeatherImage);
+            }
+        }
+
+        public string TemperatureBlock
+        {
+            get { return _temperatureBlock; }
+            set
+            {
+                _temperatureBlock = value;
+                NotifyOfPropertyChange(() => TemperatureBlock);
+            }
+        }
+
+        private string _tempHighBlock;
+
+        public string TempHighBlock
+        {
+            get { return _tempHighBlock; }
+            set
+            {
+                _tempHighBlock = value;
+                NotifyOfPropertyChange(() => TempHighBlock);
+            }
+        }
+
+        private string _tempLowBlock;
+
+        public string TempLowBlock
+        {
+            get { return _tempLowBlock; }
+            set
+            {
+                _tempLowBlock = value;
+                NotifyOfPropertyChange(() => TempLowBlock);
+            }
+        }
+
+        private string _humidityBlock;
+
+        public string HumidityBlock
+        {
+            get { return _humidityBlock; }
+            set
+            {
+                _humidityBlock = value;
+                NotifyOfPropertyChange(() => HumidityBlock);
+            }
+        }
+
+        private string _windBlock;
+
+        public string WindBlock
+        {
+            get { return _windBlock; }
+            set
+            {
+                _windBlock = value;
+                NotifyOfPropertyChange(() => WindBlock);
+            }
+        }
+
+        private string _windDirectionBlock;
+
+        public string WindDirectionBlock
+        {
+            get { return _windDirectionBlock; }
+            set
+            {
+                _windDirectionBlock = value;
+                NotifyOfPropertyChange(() => WindDirectionBlock);
+            }
+        }
+
+        private string _lastUpdateBlock;
+
+        public string LastUpdateBlock
+        {
+            get { return _lastUpdateBlock; }
+            set
+            {
+                _lastUpdateBlock = value;
+                NotifyOfPropertyChange(() => LastUpdateBlock);
+            }
+        }
+
+
+        private void SetCurrentWeatherTimer()
+        {
+            _clockRefreshTimer.Start();
+            _clockRefreshTimer.Interval = TimeSpan.FromSeconds(1);
+            _clockRefreshTimer.Tick += new EventHandler(CurrentWeatherTimerTick);
+        }
+
+        private void CurrentWeatherTimerTick(object sender, EventArgs e)
+        {
+            GetCurrentWeather();
+        }
+
+        private void GetCurrentWeather()
+        {
+            LocationBlock = _weatherDataModel.CurrentLocation;
+            CurrentWeatherImage = _weatherDataModel.CurrentWeatherImg;
+            TemperatureBlock = _weatherDataModel.CurrentTemp;
+            TempHighBlock = _weatherDataModel.TempHighVal;
+            TempLowBlock = _weatherDataModel.TempLowVal;
+            HumidityBlock = _weatherDataModel.CurrentHumidityVal;
+            WindBlock = _weatherDataModel.CurrentWindVal;
+            WindDirectionBlock = _weatherDataModel.CurrentWindDirectionVal;
+            LastUpdateBlock = _weatherDataModel.LastRefreshTimeStamp;
+        }
+
+
         #endregion
 
         public void CloseClockBtn()

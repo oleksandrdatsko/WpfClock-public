@@ -13,7 +13,6 @@ namespace WeatherApp.Models
 {
     public class WeatherDataModel
     {
-        private WeatherDataModel _weatherDataModel = new WeatherDataModel();
         private WeatherModel _weatherData;
         private WeatherDataTransformationModel _weatherDataTransformation = new WeatherDataTransformationModel();
 
@@ -23,7 +22,7 @@ namespace WeatherApp.Models
             WeatherModel response = new WeatherModel();
             try
             {
-                response = await APIProcessor<WeatherModel>.APICall(url);
+                response = await APIProcessor<WeatherModel>.APICall(GetDefaultURL());
                 
             }
             catch (Exception e)

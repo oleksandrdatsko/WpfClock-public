@@ -238,9 +238,9 @@
 
             <Grid x:Name="currentWeatherGrid" Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="65*"></ColumnDefinition>
-                    <ColumnDefinition Width="67*"></ColumnDefinition>
-                    <ColumnDefinition Width="95*"></ColumnDefinition>
+                    <ColumnDefinition Width="55"></ColumnDefinition>
+                    <ColumnDefinition Width="85"></ColumnDefinition>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"></RowDefinition>
@@ -252,7 +252,7 @@
                 <TextBlock x:Name="locationBlock" 
                            Grid.Row="0"
                            FontSize="14" Foreground="White" 
-                           Text="Warsaw, PL"
+                           Text="{Binding Path=LocationBlock, Mode=OneWay}"
                            Grid.ColumnSpan="3"
                            VerticalAlignment="Center" HorizontalAlignment="Left"
                            />
@@ -263,13 +263,15 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center" 
                        Stretch="UniformToFill"  StretchDirection="Both"
-                       ToolTip="clear sky"/>
-                
+                       ToolTip="clear sky"
+                       Source="{Binding Path=CurrentWeatherImage,Mode=OneWay}"/>
+
                 <TextBlock x:Name="temperatureBlock"
                            Grid.Row="1"
                            Grid.Column="1"
-                           FontSize="35" Foreground="White"
-                           Text="25˚"
+                           Grid.RowSpan="2"
+                           FontSize="30" Foreground="White"
+                           Text="{Binding Path=TemperatureBlock, Mode=OneWay}"
                            VerticalAlignment="Center" HorizontalAlignment="Center"
                            />
 
@@ -277,44 +279,88 @@
                             Grid.Row="1"
                             Grid.Column="2"
                             Grid.RowSpan="3"
-                            Orientation="Vertical"
+                            Orientation="Vertical" Margin="3,0,0,0"
                             >
-                    <TextBlock x:Name="tempHighBlock"
-                               Text="High: 27˚"
-                               Foreground="LightGray"
-                               FontSize="12"
-                               />
-                    <TextBlock x:Name="tempLowBlock"
-                               Text="Low: 15˚"
-                               Foreground="LightGray"
-                               FontSize="12"
-                               />
-                    <TextBlock x:Name="humidityBlock"
-                               Text="Humidity: 74%"
-                               Foreground="LightGray"
-                               FontSize="12"
-                               />
-                    <TextBlock x:Name="windBlock"
-                               Text="Wind: 3.6m/sec"
-                               Foreground="LightGray"
-                               FontSize="12"
-                               />
-                    <TextBlock x:Name="windDirectionBlock"
-                               Text="Direction: SSE"
-                               Foreground="LightGray"
-                               FontSize="12"
-                               />
+                    <StackPanel x:Name="tempHigh" Orientation="Horizontal">
+                        <TextBlock x:Name="tempHighBlockText"
+                                   Text="High: "
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                        <TextBlock x:Name="tempHighBlock"
+                                   Text="{Binding Path=TempHighBlock, Mode=OneWay}"
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                    </StackPanel>
+                    <StackPanel x:Name="tempLow" Orientation="Horizontal">
+                        <TextBlock x:Name="tempLowBlockText"
+                                   Text="Low: "
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                        <TextBlock x:Name="tempLowBlock"
+                                   Text="{Binding Path=TempLowBlock, Mode=OneWay}"
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                    </StackPanel>
+                    <StackPanel x:Name="humidity" Orientation="Horizontal">
+                        <TextBlock x:Name="humidityBlockText"
+                                   Text="Humidity: "
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                        <TextBlock x:Name="humidityBlock"
+                                   Text="{Binding Path=HumidityBlock, Mode=OneWay}"
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                    </StackPanel>
+                    <StackPanel x:Name="wind" Orientation="Horizontal">
+                        <TextBlock x:Name="windBlockText"
+                                   Text="Wind: "
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                        <TextBlock x:Name="windBlock"
+                                   Text="{Binding Path=WindBlock, Mode=OneWay}"
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                    </StackPanel>
+                    <StackPanel x:Name="windDirection" Orientation="Horizontal">
+                        <TextBlock x:Name="windDirectionBlockText"
+                                   Text="Direction: "
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                        <TextBlock x:Name="windDirectionBlock"
+                                   Text="{Binding Path=WindDirectionBlock, Mode=OneWay}"
+                                   Foreground="LightGray"
+                                   FontSize="12"
+                                   />
+                    </StackPanel>
                 </StackPanel>
 
-                <TextBlock x:Name="lastUpdateBlock"
-                           Grid.Row="3"
-                           Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           Foreground="Gray"
-                           Text="Last update: 05/12/20 16:17"
-                           FontSize="9"
-                           VerticalAlignment="Bottom"
-                           />
+                <StackPanel x:Name="lastUpdate" Orientation="Horizontal"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+                    <TextBlock x:Name="lastUpdateBlockText"
+
+                               Foreground="Gray"
+                               Text="Last update: "
+                               FontSize="9"
+                               />
+                    <TextBlock x:Name="lastUpdateBlock"
+                               Foreground="Gray"
+                               Text="{Binding Path=LastUpdateBlock, Mode=OneWay}"
+                               FontSize="9"
+                               VerticalAlignment="Bottom"
+                               />
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

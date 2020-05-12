@@ -29,13 +29,13 @@ namespace WeatherApp.Models
         {
             //if(DefaultValuesModel.Units == "metric")
             //{
-                return $"{ Math.Round(Temp, 0) }\u00B0" + "C";
+            //return $"{ Math.Round(Temp, 0) }\u00B0" + "C";
             //}
             //else
             //{
-            //    return $"{ Math.Round(Temp, 0) }\u00B0" + "F";
+            return $"{ Math.Round(Temp, 0) }\u00B0" + "F";
             //}
-            
+
         }
 
         public string FormatHumidity(double Humidity)
