@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClock.Views"
         mc:Ignorable="d"
-        Title="clockMainView" Height="500" Width="250" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="clockMainView" Height="500" Width="250" 
+        Background="{x:Null}" AllowsTransparency="True" 
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Storyboard x:Key="sbMinuteHand">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="minuteHand" RepeatBehavior="Forever">
@@ -142,7 +144,7 @@
         <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="1"/>
-                <GradientStop Color="#FF0D0D3C"/>
+                <GradientStop Color="#FF10103F" Offset="0.728"/>
             </LinearGradientBrush>
         </Border.Background>
         <Grid>
@@ -231,8 +233,89 @@
                 </Ellipse>
 
             </Grid>
-            
+
             <!-- Row 2: Weather Section -->
+
+            <Grid x:Name="currentWeatherGrid" Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*"></ColumnDefinition>
+                    <ColumnDefinition Width="67*"></ColumnDefinition>
+                    <ColumnDefinition Width="95*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="15"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="locationBlock" 
+                           Grid.Row="0"
+                           FontSize="14" Foreground="White" 
+                           Text="Warsaw, PL"
+                           Grid.ColumnSpan="3"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           />
+
+                <Image x:Name="currentWeatherImage" 
+                       Grid.Column="0" Grid.Row="1" 
+                       Grid.RowSpan="2"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" 
+                       Stretch="UniformToFill"  StretchDirection="Both"
+                       ToolTip="clear sky"/>
+                
+                <TextBlock x:Name="temperatureBlock"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           FontSize="35" Foreground="White"
+                           Text="25˚"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           />
+
+                <StackPanel x:Name="weatherParameters"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Grid.RowSpan="3"
+                            Orientation="Vertical"
+                            >
+                    <TextBlock x:Name="tempHighBlock"
+                               Text="High: 27˚"
+                               Foreground="LightGray"
+                               FontSize="12"
+                               />
+                    <TextBlock x:Name="tempLowBlock"
+                               Text="Low: 15˚"
+                               Foreground="LightGray"
+                               FontSize="12"
+                               />
+                    <TextBlock x:Name="humidityBlock"
+                               Text="Humidity: 74%"
+                               Foreground="LightGray"
+                               FontSize="12"
+                               />
+                    <TextBlock x:Name="windBlock"
+                               Text="Wind: 3.6m/sec"
+                               Foreground="LightGray"
+                               FontSize="12"
+                               />
+                    <TextBlock x:Name="windDirectionBlock"
+                               Text="Direction: SSE"
+                               Foreground="LightGray"
+                               FontSize="12"
+                               />
+                </StackPanel>
+
+                <TextBlock x:Name="lastUpdateBlock"
+                           Grid.Row="3"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Foreground="Gray"
+                           Text="Last update: 05/12/20 16:17"
+                           FontSize="9"
+                           VerticalAlignment="Bottom"
+                           />
+            </Grid>
         </Grid>
     </Border>
 </Window>
