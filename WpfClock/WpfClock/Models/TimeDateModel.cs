@@ -11,35 +11,93 @@ namespace WpfClock.Models
     {
         public TimeDateModel()
         {
-            _dateTimeNow = DateTime.Now;
+            setDate();
         }
 
-        private DateTime _dateTimeNow;
-
+        private int _hour;
+        private int _minute;
+        private int _second;
+        private string _date;
+        private string _weekDay;
 
         public int Hour
         {
-            get { return _dateTimeNow.Hour; }
+            get
+            {
+                return _hour;
+            }
+            set
+            {
+                _hour = value;
+            }
         }
 
         public int Minute
         {
-            get { return _dateTimeNow.Minute; }
+            get
+            {
+                return _minute;
+            }
+            set
+            {
+                _minute = value;
+            }
         }
 
         public int Second
         {
-            get { return _dateTimeNow.Second; }
+            get
+            {
+                return _second;
+            }
+            set
+            {
+                _second = value;
+            }
         }
 
         public string Date
         {
-            get { return dateMMMdd(); }
+            get
+            {
+                return _date;
+            }
+            set
+            {
+                _date = value;
+            }
         }
 
-        private string dateMMMdd ()
+        public string WeekDay
         {
-            return string.Format("{0:MMM, dd}", DateTime.Today);
+            get
+            {
+                return _weekDay;
+            }
+            set
+            {
+                _weekDay = value;
+            }
+        }
+
+        public void setDate()
+        {
+            DateTime dateTime = DateTime.Now;
+            Hour = dateTime.Hour;
+            Minute = dateTime.Minute;
+            Second = dateTime.Second;
+            Date = dateMMMdd(dateTime);
+            WeekDay = dateDDDD(dateTime);
+        }
+
+        private string dateMMMdd (DateTime dt)
+        {
+            return string.Format("{0:MMM, dd}", dt);
+        }
+
+        private string dateDDDD (DateTime dt)
+        {
+            return string.Format("{0:dddd}", dt);
         }
 
         private string getDateSuffix (int date)
