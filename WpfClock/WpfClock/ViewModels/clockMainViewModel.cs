@@ -15,8 +15,8 @@ namespace WpfClock.ViewModels
     {
         private DispatcherTimer _clockRefreshTimer = new DispatcherTimer();
         private TimeDateModel _timeDateModel = new TimeDateModel();
-        private int _minuteBlock;
-        private int _hourBlock;
+        private string _minuteBlock;
+        private string _hourBlock;
         private string _dateBlock;
         private string _weekDayBlock;
 
@@ -25,7 +25,7 @@ namespace WpfClock.ViewModels
             SetClockTimer();
         }
 
-        public int HourBlock
+        public string HourBlock
         {
             get
             {
@@ -38,7 +38,7 @@ namespace WpfClock.ViewModels
             }
         }
 
-        public int MinuteBlock
+        public string MinuteBlock
         {
             get
             {
@@ -97,8 +97,8 @@ namespace WpfClock.ViewModels
         private void getTime()
         {
             _timeDateModel.setDate();
-            HourBlock = _timeDateModel.Hour;
-            MinuteBlock = _timeDateModel.Minute;
+            HourBlock = _timeDateModel.HourStr;
+            MinuteBlock = _timeDateModel.MinuteStr;
             DateBlock = _timeDateModel.Date;
             WeekDayBlock = _timeDateModel.WeekDay;
         }

@@ -14,45 +14,84 @@ namespace WpfClock.Models
             setDate();
         }
 
-        private int _hour;
-        private int _minute;
-        private int _second;
+        private string _hourStr;
+        private string _minuteStr;
+        private string _secondStr;
+        private int _hourInt;
+        private int _minuteInt;
+        private int _secondInt;
         private string _date;
         private string _weekDay;
 
-        public int Hour
+        public string HourStr
         {
             get
             {
-                return _hour;
+                return _hourStr;
             }
             set
             {
-                _hour = value;
+                _hourStr = value;
             }
         }
 
-        public int Minute
+        public string MinuteStr
         {
             get
             {
-                return _minute;
+                return _minuteStr;
             }
             set
             {
-                _minute = value;
+                _minuteStr = value;
             }
         }
 
-        public int Second
+        public string SecondStr
         {
             get
             {
-                return _second;
+                return _secondStr;
             }
             set
             {
-                _second = value;
+                _secondStr = value;
+            }
+        }
+
+        public int HourInt
+        {
+            get
+            {
+                return _hourInt;
+            }
+            set
+            {
+                _hourInt = value;
+            }
+        }
+
+        public int MinuteInt
+        {
+            get
+            {
+                return _minuteInt;
+            }
+            set
+            {
+                _minuteInt = value;
+            }
+        }
+
+        public int SecondInt
+        {
+            get
+            {
+                return _secondInt;
+            }
+            set
+            {
+                _secondInt = value;
             }
         }
 
@@ -83,11 +122,29 @@ namespace WpfClock.Models
         public void setDate()
         {
             DateTime dateTime = DateTime.Now;
-            Hour = dateTime.Hour;
-            Minute = dateTime.Minute;
-            Second = dateTime.Second;
+            HourStr = timeHH(dateTime);
+            MinuteStr = timeMM(dateTime);
+            SecondStr = timeSS(dateTime);
+            HourInt = dateTime.Hour;
+            MinuteInt = dateTime.Minute;
+            SecondInt = dateTime.Second;
             Date = dateMMMdd(dateTime);
             WeekDay = dateDDDD(dateTime);
+        }
+
+        private string timeHH(DateTime dt)
+        {
+            return string.Format("{0:HH}", dt);
+        }
+
+        private string timeMM(DateTime dt)
+        {
+            return string.Format("{0:mm}", dt);
+        }
+
+        private string timeSS(DateTime dt)
+        {
+            return string.Format("{0:SS}", dt);
         }
 
         private string dateMMMdd (DateTime dt)
