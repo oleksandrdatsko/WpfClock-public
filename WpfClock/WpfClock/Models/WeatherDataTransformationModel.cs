@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeatherApp.Models
+namespace WpfClock.Models
 {
     public class WeatherDataTransformationModel
     {
@@ -25,16 +25,33 @@ namespace WeatherApp.Models
             return string.Format("{0:MMM, dd}",GetFullDateFromUnix(millisec));
         }
 
+        public string GetDateMMDDHHmmFromUnix(int millisec)
+        {
+            return string.Format("{0:MM/dd HH:mm}", GetFullDateFromUnix(millisec));
+        }
+
+        public string GetDateTodayTomorrowFromUnix(int millisec)
+        {
+            if((GetFullDateFromUnix(millisec).Day - DateTime.Now.Day) == 0)
+            {
+                return string.Format("Today, {0:HH:mm}", GetFullDateFromUnix(millisec));
+            }
+            else
+            {
+                return string.Format("{0:dddd, HH:mm}", GetFullDateFromUnix(millisec));
+            }
+        }
+
         public string FormatTemperatureCelsicus(double Temp)
         {
-            //if(DefaultValuesModel.Units == "metric")
-            //{
-            //return $"{ Math.Round(Temp, 0) }\u00B0" + "C";
-            //}
-            //else
-            //{
-            return $"{ Math.Round(Temp, 0) }\u00B0" + "F";
-            //}
+            if (DefaultValuesModel.Units == "metric")
+            {
+                return $"{ Math.Round(Temp, 0) }\u00B0" + "C";
+            }
+            else
+            {
+                return $"{ Math.Round(Temp, 0) }\u00B0" + "F";
+            }
 
         }
 
@@ -45,15 +62,15 @@ namespace WeatherApp.Models
 
         public string FormatWindSpeedMetric(double WindSpeed)
         {
-            //if(DefaultValuesModel.Units == "metric")
-            //{
+            if (DefaultValuesModel.Units == "metric")
+            {
                 return $"{ WindSpeed }m/sec";
-            //}
-            //else
-            //{
-            //    return $"{ WindSpeed }m/h";
-            //}
-            
+            }
+            else
+            {
+                return $"{ WindSpeed }m/h";
+            }
+
         }
 
         public string GetWindCompassDirection(double MeteoDegrees)

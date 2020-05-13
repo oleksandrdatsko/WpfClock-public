@@ -74,9 +74,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DefaultValuesModel.cs" />
     <Compile Include="Models\WeatherDataModel.cs" />
     <Compile Include="Models\TimeDateModel.cs" />
     <Compile Include="Models\WeatherDataTransformationModel.cs" />
+    <Compile Include="Models\WeatherForecastDataModel.cs" />
     <Compile Include="ViewModels\clockMainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\clockMainView.xaml.cs">

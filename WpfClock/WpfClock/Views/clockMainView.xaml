@@ -140,20 +140,28 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Border CornerRadius="5" BorderThickness="1" BorderBrush="Aqua" MouseLeftButtonDown="dragMe">
+    <Border x:Name="border" CornerRadius="5" BorderThickness="1" BorderBrush="Aqua" MouseLeftButtonDown="dragMe" RenderTransformOrigin="0.5,0.5">
+        <Border.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Border.RenderTransform>
         <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="1"/>
                 <GradientStop Color="#FF10103F" Offset="0.728"/>
             </LinearGradientBrush>
         </Border.Background>
-        <Grid>
+        <Grid x:Name="grid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="235"></RowDefinition>
                 <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="15"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"></ColumnDefinition>
@@ -168,6 +176,7 @@
                     Width="15" Height="20" BorderThickness="0"
                     HorizontalAlignment="Right"/>
 
+            <!--#region Clock Region-->
             <!-- Row 1: Clock Section -->
 
             <Ellipse x:Name="clockRim" Grid.Row="1" Grid.Column="1" 
@@ -234,6 +243,10 @@
 
             </Grid>
 
+            <!--#endregion-->
+
+            <!--#region Current Weather Region -->
+
             <!-- Row 2: Weather Section -->
 
             <Grid x:Name="currentWeatherGrid" Grid.Row="2" Grid.Column="1">
@@ -263,7 +276,7 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center" 
                        Stretch="UniformToFill"  StretchDirection="Both"
-                       ToolTip="clear sky"
+                       ToolTip="{Binding Path=CurrentWeatherName, Mode=OneWay}"
                        Source="{Binding Path=CurrentWeatherImage,Mode=OneWay}"/>
 
                 <TextBlock x:Name="temperatureBlock"
@@ -361,7 +374,50 @@
                                VerticalAlignment="Bottom"
                                />
                 </StackPanel>
+
+
             </Grid>
+
+            <!--#endregion-->
+
+            <!--#region Weather Forecast Region-->
+
+            <!-- Row 3 -->
+            <ItemsControl x:Name="_weatherForecastList" Grid.Row="3" Grid.Column="1"
+                          ItemsSource="{Binding Path=ForecastList}"
+                          HorizontalAlignment="Center"
+                          HorizontalContentAlignment="Left"
+                          Margin="0,10,0,0"
+                          >
+                <ItemsControl.ItemTemplate>
+                    <ItemContainerTemplate>
+                        <Border>
+                            <StackPanel x:Name="weatherForecastItem" Orientation="Horizontal" Height="14" HorizontalAlignment="Center">
+                                <TextBlock Foreground="LightGray" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Text="{Binding Path=ForecastDate}" 
+                                           Margin="0,0,10,0" Width="90" TextAlignment="Right"
+                                           />
+                                <Image Height="30" Width="30" Source="{Binding Path=CurrentWeatherImg,Mode=OneWay}"
+                                       ToolTip="{Binding Path=CurrentWeatherName, Mode=OneWay}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       Margin="0,0,10,0"/>
+                                <TextBlock Foreground="WhiteSmoke" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Text="{Binding Path=TempHighVal}"
+                                           Margin="0,0,10,0"
+                                           Width="30" TextAlignment="Right"/>
+                                <TextBlock Foreground="SteelBlue"  
+                                           VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="12" Text="{Binding Path=TempLowVal}"
+                                           Margin="0,0,10,0"
+                                           Width="30"
+                                           TextAlignment="Right"/>
+                            </StackPanel>
+                        </Border>
+                    </ItemContainerTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--#endregion-->
+
         </Grid>
     </Border>
 </Window>

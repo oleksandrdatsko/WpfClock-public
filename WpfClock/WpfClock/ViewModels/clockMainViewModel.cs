@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using WeatherApp.Models;
 using WpfClock.Models;
 
 namespace WpfClock.ViewModels
@@ -18,17 +17,21 @@ namespace WpfClock.ViewModels
     public class clockMainViewModel : Screen
     {
         private WeatherDataModel _weatherDataModel = new WeatherDataModel();
+        private WeatherForecastDataModel _weatherDataForecastModel = new WeatherForecastDataModel();
         private DispatcherTimer _clockRefreshTimer = new DispatcherTimer();
         private TimeDateModel _timeDateModel = new TimeDateModel();
         private string _minuteBlock;
         private string _hourBlock;
         private string _dateBlock;
         private string _weekDayBlock;
+        private BindableCollection<WeatherForecastDataModel> _forecastList;
 
         public clockMainViewModel()
         {
             _weatherDataModel.LoadCurrentWeatherData();
+            _weatherDataForecastModel.LoadWeatherForecastData();
             SetCurrentWeatherTimer();
+            SetForecastWeatherTimer();
             SetClockTimer();
         }
 
@@ -107,7 +110,6 @@ namespace WpfClock.ViewModels
         }
         #endregion
 
-
         #region Current Weather Properties
 
         private string _locationBlock;
@@ -119,6 +121,7 @@ namespace WpfClock.ViewModels
         private string _windBlock;
         private string _windDirectionBlock;
         private string _lastUpdateBlock;
+        private string _currentWeatherName;
 
         public string LocationBlock
         {
@@ -129,6 +132,17 @@ namespace WpfClock.ViewModels
                 NotifyOfPropertyChange(() => LocationBlock);
             }
         }
+
+        public string CurrentWeatherName
+        {
+            get { return _currentWeatherName; }
+            set
+            {
+                _currentWeatherName = value;
+                NotifyOfPropertyChange(() => CurrentWeatherName);
+            }
+        }
+
 
         public ImageSource CurrentWeatherImage
         {
@@ -225,6 +239,7 @@ namespace WpfClock.ViewModels
         private void GetCurrentWeather()
         {
             LocationBlock = _weatherDataModel.CurrentLocation;
+            CurrentWeatherName = _weatherDataModel.CurrentWeatherName;
             CurrentWeatherImage = _weatherDataModel.CurrentWeatherImg;
             TemperatureBlock = _weatherDataModel.CurrentTemp;
             TempHighBlock = _weatherDataModel.TempHighVal;
@@ -235,6 +250,35 @@ namespace WpfClock.ViewModels
             LastUpdateBlock = _weatherDataModel.LastRefreshTimeStamp;
         }
 
+        #endregion
+
+        #region Forecast Weather Region
+        public BindableCollection<WeatherForecastDataModel> ForecastList
+        {
+            get { return _forecastList; }
+            set
+            {
+                _forecastList = value;
+                NotifyOfPropertyChange(() => ForecastList);
+            }
+        }
+
+        private void SetForecastWeatherTimer()
+        {
+            _clockRefreshTimer.Start();
+            _clockRefreshTimer.Interval = TimeSpan.FromSeconds(1);
+            _clockRefreshTimer.Tick += new EventHandler(ForecastWeatherTimerTick);
+        }
+
+        private void ForecastWeatherTimerTick(object sender, EventArgs e)
+        {
+            GetForecastWeather();
+        }
+
+        private void GetForecastWeather()
+        {
+            ForecastList = _weatherDataForecastModel.ForecastData;
+        }
 
         #endregion
 

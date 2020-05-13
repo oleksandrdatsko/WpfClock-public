@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace WeatherApp.Models
+namespace WpfClock.Models
 {
     public class WeatherDataModel
     {
@@ -22,7 +22,7 @@ namespace WeatherApp.Models
             WeatherModel response = new WeatherModel();
             try
             {
-                response = await APIProcessor<WeatherModel>.APICall(GetDefaultURL());
+                response = await APIProcessor<WeatherModel>.APICall(GetURL());
                 
             }
             catch (Exception e)
@@ -38,14 +38,14 @@ namespace WeatherApp.Models
 
         private string GetURL()
         {
-            //if (DefaultValuesModel.APIKey != "")
-            //{
-            //    return $"http://api.openweathermap.org/data/2.5/weather?id={ DefaultValuesModel.CityID }&appid={ DefaultValuesModel.APIKey }&units={ DefaultValuesModel.Units }";
-            //}
-            //else
-            //{
+            if (DefaultValuesModel.APIKey != "")
+            {
+                return $"http://api.openweathermap.org/data/2.5/weather?id={ DefaultValuesModel.CityID }&appid={ DefaultValuesModel.APIKey }&units={ DefaultValuesModel.Units }";
+            }
+            else
+            {
                 return GetDefaultURL();
-            //}
+            }
         }
 
         private string GetDefaultURL()
