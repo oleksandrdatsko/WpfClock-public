@@ -30,6 +30,11 @@ namespace WpfClock.Models
             return string.Format("{0:MM/dd HH:mm}", GetFullDateFromUnix(millisec));
         }
 
+        public string GetDateMMDDHHmmssFromUnix(int millisec)
+        {
+            return string.Format("{0:MM/dd HH:mm:ss}", GetFullDateFromUnix(millisec));
+        }
+
         public string GetDateTodayTomorrowFromUnix(int millisec)
         {
             if((GetFullDateFromUnix(millisec).Day - DateTime.Now.Day) == 0)

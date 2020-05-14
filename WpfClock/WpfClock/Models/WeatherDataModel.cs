@@ -15,8 +15,9 @@ namespace WpfClock.Models
     {
         private WeatherModel _weatherData;
         private WeatherDataTransformationModel _weatherDataTransformation = new WeatherDataTransformationModel();
+        public event EventHandler<bool> WeatherDataReceivedEvent;
 
-        public async Task<WeatherModel> LoadWeather()
+        private async Task<WeatherModel> LoadWeather()
         {
             string url = GetURL();
             WeatherModel response = new WeatherModel();
@@ -73,6 +74,8 @@ namespace WpfClock.Models
             WindDeg = _weatherData.wind.Deg;
             WeatherDescription = _weatherData.weather[0].Description.ToUpper();
             WeatherIcon = _weatherData.weather[0].Icon;
+
+            WeatherDataReceivedEvent?.Invoke(this,true);
         }
 
         #region Weather Properties from WeatherModel
@@ -179,7 +182,7 @@ namespace WpfClock.Models
 
         public string LastRefreshTimeStamp
         {
-            get { return _weatherDataTransformation.GetFullDateFromUnix(Dt).ToString(); }
+            get { return _weatherDataTransformation.GetDateMMDDHHmmssFromUnix(Dt).ToString(); }
         }
 
         public string CurrentTemp

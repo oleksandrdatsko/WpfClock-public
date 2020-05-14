@@ -20,7 +20,9 @@ namespace WpfClock.Models
         private WeatherDataTransformationModel _weatherDataTransformation = new WeatherDataTransformationModel();
         private BindableCollection<WeatherForecastDataModel> _weatherForecastDataList = new BindableCollection<WeatherForecastDataModel>();
 
-        public async Task<WeatherForecastModel> LoadWeatherForecast()
+        public event EventHandler<bool> WeatherForecastDataReceivedEvent;
+
+        private async Task<WeatherForecastModel> LoadWeatherForecast()
         {
             string url = GetURL();
             WeatherForecastModel response = new WeatherForecastModel();
@@ -77,6 +79,7 @@ namespace WpfClock.Models
                 _weatherForecastDataList.Add(tmp);
             }
 
+            WeatherForecastDataReceivedEvent?.Invoke(this, true);
         }
 
         #region Weather Forecast properties

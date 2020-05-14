@@ -19,6 +19,8 @@ namespace WpfClock.ViewModels
         private WeatherDataModel _weatherDataModel = new WeatherDataModel();
         private WeatherForecastDataModel _weatherDataForecastModel = new WeatherForecastDataModel();
         private DispatcherTimer _clockRefreshTimer = new DispatcherTimer();
+        private DispatcherTimer _weatherDataRefreshTimer = new DispatcherTimer();
+        private DispatcherTimer _weatherForecastDataRefreshTimer = new DispatcherTimer();
         private TimeDateModel _timeDateModel = new TimeDateModel();
         private string _minuteBlock;
         private string _hourBlock;
@@ -30,10 +32,40 @@ namespace WpfClock.ViewModels
         {
             _weatherDataModel.LoadCurrentWeatherData();
             _weatherDataForecastModel.LoadWeatherForecastData();
-            SetCurrentWeatherTimer();
-            SetForecastWeatherTimer();
             SetClockTimer();
+
+            _weatherDataModel.WeatherDataReceivedEvent += _weatherDataModel_WeatherDataReceivedEvent;
+            _weatherDataForecastModel.WeatherForecastDataReceivedEvent += _weatherDataForecastModel_WeatherForecastDataReceivedEvent;
+
         }
+
+        #region Event handlers
+        private void _weatherDataForecastModel_WeatherForecastDataReceivedEvent(object sender, bool e)
+        {
+            try
+            {
+                SetForecastWeatherTimer();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void _weatherDataModel_WeatherDataReceivedEvent(object sender, bool e)
+        {
+            try
+            {
+                SetCurrentWeatherTimer();
+            }
+            catch (Exception)
+            {
+
+            }
+            
+        }
+
+        #endregion
 
         #region Clock Properties
         public string HourBlock
@@ -91,7 +123,7 @@ namespace WpfClock.ViewModels
         private void SetClockTimer()
         {
             _clockRefreshTimer.Start();
-            _clockRefreshTimer.Interval = TimeSpan.FromSeconds(0.5);
+            _clockRefreshTimer.Interval = TimeSpan.FromSeconds(0.1);
             _clockRefreshTimer.Tick += new EventHandler(ClockTimerTick);
         }
 
@@ -142,7 +174,6 @@ namespace WpfClock.ViewModels
                 NotifyOfPropertyChange(() => CurrentWeatherName);
             }
         }
-
 
         public ImageSource CurrentWeatherImage
         {
@@ -226,13 +257,14 @@ namespace WpfClock.ViewModels
 
         private void SetCurrentWeatherTimer()
         {
-            _clockRefreshTimer.Start();
-            _clockRefreshTimer.Interval = TimeSpan.FromSeconds(1);
-            _clockRefreshTimer.Tick += new EventHandler(CurrentWeatherTimerTick);
+            _weatherDataRefreshTimer.Start();
+            _weatherDataRefreshTimer.Interval = TimeSpan.FromSeconds(0.1);
+            _weatherDataRefreshTimer.Tick += new EventHandler(CurrentWeatherTimerTick);
         }
 
         private void CurrentWeatherTimerTick(object sender, EventArgs e)
         {
+            _weatherDataRefreshTimer.Stop();
             GetCurrentWeather();
         }
 
@@ -265,13 +297,14 @@ namespace WpfClock.ViewModels
 
         private void SetForecastWeatherTimer()
         {
-            _clockRefreshTimer.Start();
-            _clockRefreshTimer.Interval = TimeSpan.FromSeconds(1);
-            _clockRefreshTimer.Tick += new EventHandler(ForecastWeatherTimerTick);
+            _weatherForecastDataRefreshTimer.Start();
+            _weatherForecastDataRefreshTimer.Interval = TimeSpan.FromSeconds(0.1);
+            _weatherForecastDataRefreshTimer.Tick += new EventHandler(ForecastWeatherTimerTick);
         }
 
         private void ForecastWeatherTimerTick(object sender, EventArgs e)
         {
+            _weatherForecastDataRefreshTimer.Stop();
             GetForecastWeather();
         }
 

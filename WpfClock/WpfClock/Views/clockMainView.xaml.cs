@@ -34,6 +34,7 @@ namespace WpfClock.Views
             Storyboard hours = (Storyboard)hourHand.FindResource("sbHourHand");
             hours.Begin();
             hours.Seek(new TimeSpan(0, 0, timeDateModel.MinuteInt, 0, 0));
+
         }
 
         private void dragMe(object sender, MouseButtonEventArgs e)
@@ -48,5 +49,7 @@ namespace WpfClock.Views
                 //throw;
             }
         }
+
+        
     }
 }
