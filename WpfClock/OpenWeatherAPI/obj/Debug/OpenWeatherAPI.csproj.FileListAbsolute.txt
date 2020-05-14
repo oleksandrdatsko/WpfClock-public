@@ -1,0 +1,32 @@
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\OpenWeatherAPI.dll
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\OpenWeatherAPI.pdb
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csprojAssemblyReference.cache
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csproj.CoreCompileInputs.cache
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.dll
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.pdb
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\OpenWeatherAPI.dll.config
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\Newtonsoft.Json.dll
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Web.Http.dll
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\Newtonsoft.Json.xml
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Web.Http.xml
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csproj.CopyComplete
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.Properties.Resources.resources
+C:\Users\DATSKO\source\repos\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csproj.GenerateResource.cache
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\OpenWeatherAPI.dll.config
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\OpenWeatherAPI.dll
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\OpenWeatherAPI.pdb
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\Newtonsoft.Json.dll
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Net.Http.Formatting.dll
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Web.Http.dll
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\Newtonsoft.Json.xml
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Net.Http.Formatting.xml
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\bin\Debug\System.Web.Http.xml
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csprojAssemblyReference.cache
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.Properties.Resources.resources
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csproj.GenerateResource.cache
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csproj.CoreCompileInputs.cache
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.csproj.CopyComplete
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.dll
+D:\Visual Studio Projects\MVVM_WPF\OpenWeatherAPI\obj\Debug\OpenWeatherAPI.pdb
