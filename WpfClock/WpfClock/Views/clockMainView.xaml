@@ -182,6 +182,18 @@
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="sbSunrise">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="clockRim">
+                <EasingColorKeyFrame KeyTime="0" Value="#FF4949DF"/>
+                <EasingColorKeyFrame KeyTime="0:0:5" Value="#FFDF6949"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="sbSunset">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="clockRim">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFDF6949"/>
+                <EasingColorKeyFrame KeyTime="0:0:5" Value="#FF4949DF"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="SettingsBtn">
@@ -252,7 +264,7 @@
             </StackPanel>
 
             <!--#endregion-->
-            
+
             <!--#region Clock Region-->
             <!-- Row 1: Clock Section -->
 
@@ -562,7 +574,7 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            
+
                         </StackPanel>
 
                         <StackPanel x:Name="refreshIntervalDropDown"
@@ -583,7 +595,7 @@
                                      Margin="10" IsTextSearchEnabled="True" HorizontalAlignment="Right"
                                      />
                         </StackPanel>
-                        
+
                         <StackPanel Grid.Row="2" Orientation="Vertical"
                                     HorizontalAlignment="Left">
                             <TextBlock Foreground="White" Text="Measurement units : " Margin="10,0,0,0"/>
@@ -639,11 +651,11 @@
                                 Content="Cancel" Background="{x:Null}"
                                 Margin="10" Width="100" Foreground="White"/>
                     </StackPanel>
-                    
+
 
                 </Grid>
             </Border>
-            
+
             <!--#endregion-->
 
             <StackPanel x:Name="acknowledgement" Grid.Row="4" Grid.Column="1"
@@ -653,7 +665,7 @@
                                    FontSize="8" MouseLeftButtonDown="Acknowledge_MouseLeftButtonDown" Cursor="Hand"/>
                 </StackPanel>
             </StackPanel>
-            
+
         </Grid>
     </Border>
 </Window>

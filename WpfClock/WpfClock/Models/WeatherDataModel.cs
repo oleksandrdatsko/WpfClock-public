@@ -65,6 +65,8 @@ namespace WpfClock.Models
 
             Name = _weatherData.Name;
             SysCountry = _weatherData.sys.Country;
+            SysSunrise = _weatherData.sys.Sunrise;
+            SysSunset = _weatherData.sys.Sunset;
             Dt = _weatherData.Dt;
             MainTemp = _weatherData.main.Temp;
             MainTempMax = _weatherData.main.Temp_max;
@@ -89,6 +91,8 @@ namespace WpfClock.Models
         private double _windSpeed;
         private double _windDeg;
         private string _sysCountry;
+        private int _sysSunrise;
+        private int _sysSunset;
         private int _dt;
         private int _id;
         private string _name;
@@ -154,6 +158,18 @@ namespace WpfClock.Models
             set { _sysCountry = value; }
         }
 
+        public int SysSunrise
+        {
+            get { return _sysSunrise; }
+            set { _sysSunrise = value; }
+        }
+
+        public int SysSunset
+        {
+            get { return _sysSunset; }
+            set { _sysSunset = value; }
+        }
+
         public int Dt
         {
             get { return _dt; }
@@ -178,6 +194,16 @@ namespace WpfClock.Models
         public string CurrentLocation
         {
             get { return Name != "Error" ? $"{ Name }, { SysCountry }" : $"{ Name } - { SysCountry }"; }
+        }
+
+        public DateTime Sunrise
+        {
+            get { return _weatherDataTransformation.GetFullDateFromUnix(SysSunrise); }
+        }
+
+        public DateTime Sunset
+        {
+            get { return _weatherDataTransformation.GetFullDateFromUnix(SysSunset); }
         }
 
         public string LastRefreshTimeStamp

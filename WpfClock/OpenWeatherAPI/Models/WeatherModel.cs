@@ -129,15 +129,21 @@ namespace OpenWeatherAPI.Models
     public class Sys
     {
         public string Country { get; set; }
+        public int Sunrise { get; set; }
+        public int Sunset { get; set; }
 
         public static bool operator == (Sys A, Sys B)
         {
-            return A.Country == B.Country;
+            return A.Country == B.Country &&
+                    A.Sunrise == B.Sunrise &&
+                    A.Sunset == B.Sunset;
         }
 
         public static bool operator != (Sys A, Sys B)
         {
-            return A.Country != B.Country;
+            return A.Country != B.Country ||
+                    A.Sunrise != B.Sunrise ||
+                    A.Sunset != B.Sunset;
         }
     }
 

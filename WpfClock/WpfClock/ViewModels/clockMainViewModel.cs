@@ -8,14 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WpfClock.Models;
+using WpfClock.Views;
 
 namespace WpfClock.ViewModels
 {
     public class clockMainViewModel : Screen
     {
+        private TimeDateModel _timeDateModel = new TimeDateModel();
         private WeatherDataModel _weatherDataModel = new WeatherDataModel();
         private WeatherForecastDataModel _weatherDataForecastModel = new WeatherForecastDataModel();
         private RefreshIntervalModel _refreshIntervalModel = new RefreshIntervalModel();
@@ -23,7 +26,6 @@ namespace WpfClock.ViewModels
         private DispatcherTimer _weatherRefreshTimer = new DispatcherTimer();
         private DispatcherTimer _weatherDataRefreshTimer = new DispatcherTimer();
         private DispatcherTimer _weatherForecastDataRefreshTimer = new DispatcherTimer();
-        private TimeDateModel _timeDateModel = new TimeDateModel();
         private string _minuteBlock;
         private string _hourBlock;
         private string _dateBlock;
@@ -143,6 +145,21 @@ namespace WpfClock.ViewModels
             MinuteBlock = _timeDateModel.MinuteStr;
             DateBlock = _timeDateModel.Date;
             WeekDayBlock = _timeDateModel.WeekDay;
+
+            if(_weatherDataModel.Sunrise != null)
+            {
+                _timeDateModel.IsSunUp(_weatherDataModel.Sunrise);
+                _timeDateModel.SunIsUpEvent += _timeDateModel_SunIsUpEvent;
+            }
+
+        }
+
+        private void _timeDateModel_SunIsUpEvent(object sender, bool e)
+        {
+            clockMainView window = (clockMainView)Application.Current.MainWindow;
+            Storyboard sunset = (Storyboard)window.clockRim.FindResource("sbSunset");
+            sunset.Begin();
+            
         }
         #endregion
 
