@@ -18,7 +18,9 @@ namespace WpfClock.ViewModels
     {
         private WeatherDataModel _weatherDataModel = new WeatherDataModel();
         private WeatherForecastDataModel _weatherDataForecastModel = new WeatherForecastDataModel();
+        private RefreshIntervalModel _refreshIntervalModel = new RefreshIntervalModel();
         private DispatcherTimer _clockRefreshTimer = new DispatcherTimer();
+        private DispatcherTimer _weatherRefreshTimer = new DispatcherTimer();
         private DispatcherTimer _weatherDataRefreshTimer = new DispatcherTimer();
         private DispatcherTimer _weatherForecastDataRefreshTimer = new DispatcherTimer();
         private TimeDateModel _timeDateModel = new TimeDateModel();
@@ -33,6 +35,8 @@ namespace WpfClock.ViewModels
             _weatherDataModel.LoadCurrentWeatherData();
             _weatherDataForecastModel.LoadWeatherForecastData();
             SetClockTimer();
+            GetSettings();
+            SetWeatherRefreshTimer();
 
             _weatherDataModel.WeatherDataReceivedEvent += _weatherDataModel_WeatherDataReceivedEvent;
             _weatherDataForecastModel.WeatherForecastDataReceivedEvent += _weatherDataForecastModel_WeatherForecastDataReceivedEvent;
@@ -315,11 +319,186 @@ namespace WpfClock.ViewModels
 
         #endregion
 
+        #region Weather Auto-Refresh
+        private void SetWeatherRefreshTimer()
+        {
+            _weatherRefreshTimer.Stop();
+            _weatherRefreshTimer.Start();
+            _weatherRefreshTimer.Interval = TimeSpan.FromMinutes(DefaultValuesModel.RefreshInterval);
+            _weatherRefreshTimer.Tick += new EventHandler(WeatherRefreshTimerTick);
+        }
+
+        private void WeatherRefreshTimerTick(object sender, EventArgs e)
+        {
+            GetCurrentWeather();
+            GetForecastWeather();
+        }
+
+        #endregion
+
         #region Buttons
         public void CloseClockBtn()
         {
             Application.Current.Shutdown();
         }
+
+        public void RefreshBtn()
+        {
+            GetCurrentWeather();
+            GetForecastWeather();
+        }
+
+        public void SettingsBtn()
+        {
+            GetSettings();
+        }
+
+        public void closeSettingsBtn()
+        {
+            SetDefaultSettings();
+        }
+
+        #endregion
+
+        #region Settings Region
+        private LocationModel _locationModel = new LocationModel();
+        private int _refreshInterval;
+        private BindableCollection<int> _refreshIntervalList;
+        private BindableCollection<string> _locationList;
+        private LocationModel _location;
+        private string _fullLocation;
+        private bool _metricUnits;
+        private bool _imperialUnits;
+        private string _apiKey;
+
+        public BindableCollection<int> RefreshIntervalList
+        {
+            get { return _refreshIntervalList; }
+            set
+            {
+                _refreshIntervalList = value;
+                NotifyOfPropertyChange(() => RefreshIntervalList);
+            }
+        }
+
+        public int RefreshInterval
+        {
+            get { return _refreshInterval; }
+            set
+            {
+                _refreshInterval = value;
+                NotifyOfPropertyChange(() => RefreshInterval);
+            }
+        }
+
+
+        public BindableCollection<string> LocationList
+        {
+            get { return _locationList; }
+            set
+            {
+                _locationList = value;
+                NotifyOfPropertyChange(() => LocationList);
+            }
+        }
+
+        public string FullLocation
+        {
+            get { return _fullLocation; }
+            set { _fullLocation = value; }
+        }
+
+        public LocationModel Location
+        {
+            get { return _location; }
+            set { _location = value; }
+        }
+
+
+        public bool MetricUnits
+        {
+            get { return _metricUnits; }
+            set
+            {
+                _metricUnits = value;
+                NotifyOfPropertyChange(() => MetricUnits);
+            }
+        }
+
+        public bool ImperialUnits
+        {
+            get { return _imperialUnits; }
+            set
+            {
+                _imperialUnits = value;
+                NotifyOfPropertyChange(() => ImperialUnits);
+            }
+        }
+
+        public string ApiKey
+        {
+            get { return _apiKey; }
+            set
+            {
+                _apiKey = value;
+                NotifyOfPropertyChange(() => ApiKey);
+            }
+        }
+
+        private void GetSettings()
+        {
+            _locationModel.Country = DefaultValuesModel.Country;
+            _locationModel.Name = DefaultValuesModel.CityName;
+            _locationModel.Id = DefaultValuesModel.CityID;
+
+            FullLocation = _locationModel.FullLocation;
+            RefreshInterval = DefaultValuesModel.RefreshInterval;
+            RefreshIntervalList = _refreshIntervalModel.RefreshIntervals;
+            GetDefaultUnits(DefaultValuesModel.Units);
+            ApiKey = DefaultValuesModel.APIKey;
+
+        }
+
+        public void SetDefaultSettings()
+        {
+            DefaultValuesModel.RefreshInterval = RefreshInterval;
+            DefaultValuesModel.APIKey = ApiKey;
+            DefaultValuesModel.Units = SetDefaultUnits();
+            if (Location != null)
+            {
+                DefaultValuesModel.CityID = Location.Id;
+                DefaultValuesModel.CityName = Location.Name;
+                DefaultValuesModel.Country = Location.Country;
+            }
+
+            DefaultValuesModel.SaveDefaultValues();
+
+        }
+
+        public void GetDefaultUnits(string units)
+        {
+            if (units == "metric")
+            {
+                MetricUnits = true;
+            }
+            else
+            {
+                ImperialUnits = true;
+            }
+        }
+
+        public string SetDefaultUnits()
+        {
+            if (MetricUnits)
+            {
+                return "metric";
+            }
+            else
+            {
+                return "imperial";
+            }
+        }
+
         #endregion
 
     }

@@ -75,10 +75,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\DefaultValuesModel.cs" />
+    <Compile Include="Models\LocationDataModel.cs" />
+    <Compile Include="Models\LocationListModel.cs" />
+    <Compile Include="Models\PasswordHelperModel.cs" />
+    <Compile Include="Models\RefreshIntervalModel.cs" />
     <Compile Include="Models\WeatherDataModel.cs" />
     <Compile Include="Models\TimeDateModel.cs" />
     <Compile Include="Models\WeatherDataTransformationModel.cs" />
     <Compile Include="Models\WeatherForecastDataModel.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\clockMainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\clockMainView.xaml.cs">
@@ -112,6 +117,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Resources\city.list.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -131,6 +137,15 @@
       <Project>{3B5F9A1B-4751-41D6-8A3A-002DD67B1964}</Project>
       <Name>OpenWeatherAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icons8-settings-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icons8-refresh-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\OpenWeather.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

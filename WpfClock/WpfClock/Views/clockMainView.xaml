@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClock.Views"
+        xmlns:s="clr-namespace:WpfClock.Models"
         mc:Ignorable="d"
         Title="clockMainView" Height="500" Width="250" 
         Background="{x:Null}" AllowsTransparency="True" 
@@ -154,6 +155,9 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="closeSettingsBtn">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="cancelSettingsBtn">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="settingsBorder">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Hidden}"/>
@@ -168,10 +172,10 @@
                 <EasingDoubleKeyFrame KeyTime="0" Value="-487"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="closeSettingsBtn">
-                <EasingColorKeyFrame KeyTime="0:0:1" Value="#FFF7F2F2"/>
-            </ColorAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="closeSettingsBtn">
+                <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="cancelSettingsBtn">
                 <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="settingsBorder">
@@ -185,6 +189,9 @@
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="closeSettingsBtn">
             <BeginStoryboard x:Name="sbSettingsBorderMinimize_BeginStoryboard" Storyboard="{StaticResource sbSettingsBorderMinimize}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="cancelSettingsBtn">
+            <BeginStoryboard x:Name="sbSettingsBorderMinimize_BeginStoryboard2" Storyboard="{StaticResource sbSettingsBorderMinimize}"/>
         </EventTrigger>
     </Window.Triggers>
     <Border x:Name="border" CornerRadius="5" BorderThickness="1" BorderBrush="Aqua" MouseLeftButtonDown="dragMe" RenderTransformOrigin="0.5,0.5">
@@ -216,18 +223,36 @@
                 <ColumnDefinition Width="10"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
+            <!--#region Buttons -->
             <!-- Row 0 -->
-            <Button x:Name="CloseClockBtn"
-                    Grid.Row="0" Grid.Column="1" Background="{x:Null}" 
-                    Content="X" Foreground="White"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Grid.Column="1" Grid.Row="0">
+                <Button x:Name="RefreshBtn" 
                     Width="15" Height="20" BorderThickness="0"
-                    HorizontalAlignment="Right"/>
-            <Button x:Name="SettingsBtn"
-                    Grid.Row="0" Grid.Column="1" Background="{x:Null}" 
-                    Content="S" Foreground="White"
+                    HorizontalAlignment="left" Background="{x:Null}">
+                    <StackPanel>
+                        <Image Source="D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\Resources\icons8-refresh-64.png" ToolTip="Refresh"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="SettingsBtn" 
                     Width="15" Height="20" BorderThickness="0"
-                    HorizontalAlignment="left"/>
+                    HorizontalAlignment="left" Background="{x:Null}">
+                    <StackPanel>
+                        <Image Source="D:\Visual Studio Projects\WpfClock\WpfClock\WpfClock\Resources\icons8-settings-64.png" ToolTip="Settings"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="CloseClockBtn"
+                        Background="{x:Null}" 
+                        Content="X" Foreground="White"
+                        ToolTip="Close"
+                        VerticalContentAlignment="Center"
+                        Width="15" Height="20" BorderThickness="0"
+                        HorizontalAlignment="Right"/>
+            </StackPanel>
 
+            <!--#endregion-->
+            
             <!--#region Clock Region-->
             <!-- Row 1: Clock Section -->
 
@@ -470,12 +495,13 @@
 
             <!--#endregion-->
 
+            <!--#region Settings Section -->
 
             <Border x:Name="settingsBorder"
                     Grid.Row="0" Grid.Column="1"
                     Grid.RowSpan="4"
                     Height="487" Width="240"
-                    VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"
+                    VerticalAlignment="Top" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" d:IsHidden="True"
                     >
                 <Border.RenderTransform>
                     <TransformGroup>
@@ -494,16 +520,140 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition  Height="0.5*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="closeSettingsBtn" Grid.Row="1"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                        Content="close" Background="{x:Null}"/>
+                    <Grid x:Name="settingsParameters"
+                          Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel x:Name="locationDropDown"
+                                    Grid.Row="0" Orientation="Horizontal"
+                                    VerticalAlignment="Center" Margin="5,0,0,0">
+                            <Label Content="Location: "
+                                   Foreground="White"
+                                   VerticalAlignment="Center"/>
+                            <ComboBox x:Name="locationList"
+                                     Width="152" Background="{x:Null}"
+                                     Foreground="Black" BorderThickness="0"
+                                     ItemsSource="{Binding Path=(s:LocationListModel.LocationList),IsAsync=True}"
+                                     SelectedItem="{Binding Path=Location,Mode=OneWayToSource}"
+                                     Text="{Binding Path=FullLocation,Mode=OneWay}"
+                                     TextSearch.TextPath="FullLocation"
+                                     Margin="10" HorizontalAlignment="Right"
+                                     IsTextSearchEnabled="True"
+                                     IsEditable="True"
+                                     >
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:Name="FullLocation">
+                                        <TextBlock Text="{Binding FullLocation}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            
+                        </StackPanel>
+
+                        <StackPanel x:Name="refreshIntervalDropDown"
+                                    Grid.Row="1" Orientation="Horizontal"
+                                    VerticalAlignment="Center" Margin="5,0,0,0">
+                            <Label Content="Refresh Interval: "
+                                   Foreground="White"
+                                   HorizontalContentAlignment="Left"
+                                   VerticalContentAlignment="Center"/>
+                            <ComboBox x:Name="refreshInterval"
+                                     Width="115" Background="#FFC56F6F"
+                                     Foreground="Black" BorderThickness="0"
+                                     IsEditable="True"
+                                     IsReadOnly="True"
+                                     Text="{Binding Path=RefreshInterval}"
+                                     ItemsSource="{Binding Path=RefreshIntervalList,Mode=OneWay}"
+                                     DisplayMemberPath=""
+                                     Margin="10" IsTextSearchEnabled="True" HorizontalAlignment="Right"
+                                     />
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="2" Orientation="Vertical"
+                                    HorizontalAlignment="Left">
+                            <TextBlock Foreground="White" Text="Measurement units : " Margin="10,0,0,0"/>
+                            <StackPanel Orientation="Vertical" >
+                                <RadioButton GroupName="MeasurementUnitsGroup" 
+                                             x:Name="MetricUnits"
+                                             Content="Metric units" 
+                                             Foreground="#FFEEECEA"
+                                             ToolTip="Celsius; meter/sec" Margin="30,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <RadioButton GroupName="MeasurementUnitsGroup" 
+                                             x:Name="ImperialUnits" 
+                                             Content="Imperial units" 
+                                             Foreground="#FFEEECEA"
+                                             ToolTip="Fahrenheit; miles/hour" Margin="30,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock Foreground="White" Text="API Key : " Margin="10,10,0,10" VerticalAlignment="Center"
+                                       ToolTip="To obtain API key, please register at OpenWeather.com. Registration is free. If API key is empty a test endpoint is used" />
+                            <PasswordBox s:PasswordHelperModel.Attach="True"  
+                                         s:PasswordHelperModel.Password="{Binding Path=ApiKey, 
+                                                                          Mode=TwoWay, 
+                                                                          UpdateSourceTrigger=PropertyChanged}"
+                                         Width="175" 
+                                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                                         FontSize="10"
+                                         Foreground="White"
+                                         Background="{x:Null}" Margin="0,10"
+                                         BorderThickness="0"/>
+                        </StackPanel>
+                        <Border Grid.Row="3"
+                                BorderBrush="White"
+                                BorderThickness="1"
+                                Width="175"
+                                Height="1" Margin="62,34.6,3,13.2"/>
+
+                    </Grid>
+
+                    <StackPanel x:Name="settingsControlButtons"
+                                Grid.Row="3" Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                >
+                        <Button x:Name="closeSettingsBtn" Grid.Row="2"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                Content="Save and Close" Background="{x:Null}"
+                                Margin="10" Width="100"
+                                Foreground="White"/>
+                        <Button x:Name="cancelSettingsBtn" Grid.Row="2"
+                                VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                Content="Cancel" Background="{x:Null}"
+                                Margin="10" Width="100" Foreground="White"/>
+                    </StackPanel>
+                    
 
                 </Grid>
             </Border>
+            
+            <!--#endregion-->
 
+            <StackPanel x:Name="acknowledgement" Grid.Row="4" Grid.Column="1"
+                        Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="Acknowledge" Text="Powered by OpenWeatherMap" Foreground="White"
+                                   FontSize="8" MouseLeftButtonDown="Acknowledge_MouseLeftButtonDown" Cursor="Hand"/>
+                </StackPanel>
+            </StackPanel>
+            
         </Grid>
     </Border>
 </Window>

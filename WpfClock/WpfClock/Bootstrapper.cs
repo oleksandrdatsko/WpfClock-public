@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfClock.Models;
 using WpfClock.ViewModels;
 
 namespace WpfClock
@@ -16,6 +17,7 @@ namespace WpfClock
         {
             Initialize();
             APIHelper.InitializeClient();
+            LocationDataModel GetLocationList = new LocationDataModel();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
