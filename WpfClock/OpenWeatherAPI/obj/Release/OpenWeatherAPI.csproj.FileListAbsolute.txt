@@ -1,0 +1,15 @@
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\OpenWeatherAPI.dll.config
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\OpenWeatherAPI.dll
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\OpenWeatherAPI.pdb
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\Newtonsoft.Json.dll
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\System.Net.Http.Formatting.dll
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\System.Web.Http.dll
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\Newtonsoft.Json.xml
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\System.Net.Http.Formatting.xml
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\bin\Release\System.Web.Http.xml
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\obj\Release\OpenWeatherAPI.Properties.Resources.resources
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\obj\Release\OpenWeatherAPI.csproj.GenerateResource.cache
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\obj\Release\OpenWeatherAPI.csproj.CoreCompileInputs.cache
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\obj\Release\OpenWeatherAPI.csproj.CopyComplete
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\obj\Release\OpenWeatherAPI.dll
+D:\Visual Studio Projects\WpfClock\WpfClock\OpenWeatherAPI\obj\Release\OpenWeatherAPI.pdb
