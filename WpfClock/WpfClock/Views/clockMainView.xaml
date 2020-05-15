@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="clockMainView" Height="500" Width="250" 
         Background="{x:Null}" AllowsTransparency="True" 
-        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/WpfClock;component/Resources/sun.png">
     <Window.Resources>
         <Storyboard x:Key="sbMinuteHand">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="minuteHand" RepeatBehavior="Forever">
