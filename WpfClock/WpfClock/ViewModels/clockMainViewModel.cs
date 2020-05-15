@@ -145,21 +145,6 @@ namespace WpfClock.ViewModels
             MinuteBlock = _timeDateModel.MinuteStr;
             DateBlock = _timeDateModel.Date;
             WeekDayBlock = _timeDateModel.WeekDay;
-
-            if(_weatherDataModel.Sunrise != null)
-            {
-                _timeDateModel.IsSunUp(_weatherDataModel.Sunrise);
-                _timeDateModel.SunIsUpEvent += _timeDateModel_SunIsUpEvent;
-            }
-
-        }
-
-        private void _timeDateModel_SunIsUpEvent(object sender, bool e)
-        {
-            clockMainView window = (clockMainView)Application.Current.MainWindow;
-            Storyboard sunset = (Storyboard)window.clockRim.FindResource("sbSunset");
-            sunset.Begin();
-            
         }
         #endregion
 
@@ -347,8 +332,7 @@ namespace WpfClock.ViewModels
 
         private void WeatherRefreshTimerTick(object sender, EventArgs e)
         {
-            GetCurrentWeather();
-            GetForecastWeather();
+            RefreshBtn();
         }
 
         #endregion
@@ -361,8 +345,9 @@ namespace WpfClock.ViewModels
 
         public void RefreshBtn()
         {
-            GetCurrentWeather();
-            GetForecastWeather();
+            _weatherDataModel.LoadCurrentWeatherData();
+            _weatherDataForecastModel.LoadWeatherForecastData();
+            SetWeatherRefreshTimer();
         }
 
         public void SettingsBtn()
@@ -373,6 +358,8 @@ namespace WpfClock.ViewModels
         public void closeSettingsBtn()
         {
             SetDefaultSettings();
+            SettingsBtn();
+            RefreshBtn();
         }
 
         #endregion

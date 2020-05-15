@@ -182,18 +182,6 @@
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="sbSunrise">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="clockRim">
-                <EasingColorKeyFrame KeyTime="0" Value="#FF4949DF"/>
-                <EasingColorKeyFrame KeyTime="0:0:5" Value="#FFDF6949"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="sbSunset">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="clockRim">
-                <EasingColorKeyFrame KeyTime="0" Value="#FFDF6949"/>
-                <EasingColorKeyFrame KeyTime="0:0:5" Value="#FF4949DF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="SettingsBtn">

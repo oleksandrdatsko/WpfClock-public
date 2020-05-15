@@ -9,9 +9,6 @@ namespace WpfClock.Models
 {
     public class TimeDateModel
     {
-        public event EventHandler<bool> SunIsUpEvent;
-        public event EventHandler<bool> SunIsDownEvent;
-
         public TimeDateModel()
         {
             setDate();
@@ -158,18 +155,6 @@ namespace WpfClock.Models
         private string dateDDDD (DateTime dt)
         {
             return string.Format("{0:dddd}", dt);
-        }
-
-        public void IsSunUp (DateTime dt)
-        {
-            if(dt < DateTime.Now)
-            {
-                SunIsUpEvent?.Invoke(this, true);
-            }
-            else
-            {
-                SunIsDownEvent?.Invoke(this, true);
-            }
         }
 
         private string getDateSuffix (int date)

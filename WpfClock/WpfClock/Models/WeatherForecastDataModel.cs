@@ -65,6 +65,7 @@ namespace WpfClock.Models
 
         private async Task GetData()
         {
+            _weatherForecastDataList.Clear();
             _weatherForecastData = await LoadWeatherForecast();
 
             for(int i = 0; i < _weatherForecastData.list.Count; i++ )
